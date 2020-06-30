@@ -21,8 +21,17 @@ public class EvaluationService {
 	static class SpeedConverter {
 
 		public static long toMilesPerHour(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+			
+			
+			if (kilometersPerHour < 0) {
+				
+				return -1;
+			}
+			
+			return Math.round(kilometersPerHour/1.609);
+			
+			
+			
 		}
 
 		/**
@@ -41,8 +50,13 @@ public class EvaluationService {
 		 * Value"
 		 */
 		public static String printConversion(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			
+			if (kilometersPerHour < 0) {
+				return "Invalid Value";
+			}
+			
+			
+			return kilometersPerHour + " km/h = " + toMilesPerHour(kilometersPerHour) + " mi/h";
 		}
 	}
 
@@ -66,9 +80,18 @@ public class EvaluationService {
 	 * If the parameter kiloBytes is less than 0 then print the text "Invalid
 	 * Value".
 	 */
-	public String printMegaBytesAndKiloBytes(int XX) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String printMegaBytesAndKiloBytes(int kiloBytes) {
+		
+		if (kiloBytes < 0) {
+			return "Invalid Value";
+		}
+		
+		int megaBytes = kiloBytes/1024;
+		
+		int remainder = kiloBytes%1024;
+		
+		return kiloBytes + " KB = "+ megaBytes +" MB and " + remainder + " KB";
+
 	}
 
 	/**
@@ -91,7 +114,12 @@ public class EvaluationService {
 	 * If the hourOfDay parameter is less than 0 or greater than 23, return false.
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
-		// TODO Write an implementation for this method declaration
+		
+		if (isBarking && (hourOfDay < 8 || hourOfDay > 22) ) {
+			
+			return true;
+		}
+		
 		return false;
 	}
 
@@ -107,7 +135,14 @@ public class EvaluationService {
 	 * Otherwise, return false;
 	 */
 	public boolean areEqualByThreeDecimalPlaces(double firstNum, double secondNum) {
-		// TODO Write an implementation for this method declaration
+		
+		int a = (int) (firstNum*1000);
+		int b = (int) (secondNum*1000);
+		
+		if (a == b)
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -124,7 +159,17 @@ public class EvaluationService {
 	static class TeenNumberChecker {
 
 		public static boolean hasTeen(int x, int y, int z) {
-			// TODO Write an implementation for this method declaration
+			
+			if (isTeen(x)) {
+				return true;
+			}
+			if (isTeen(y)) {
+				return true;
+			}
+			if (isTeen(z)) {
+				return true;
+			}
+			
 			return false;
 		}
 
@@ -132,7 +177,10 @@ public class EvaluationService {
 		// Then pass the parameter to hasTeen method
 
 		public static boolean isTeen(int number) {
-			// TODO Write an implementation for this method declaration
+			if (number > 12 && number < 20)
+			{
+				return true;
+			}
 			return false;
 		}
 	}
@@ -153,8 +201,19 @@ public class EvaluationService {
 	 * ZZ represents the calculated days.
 	 */
 	public String printYearsAndDays(long minutes) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		if  (minutes < 0)
+		{
+			return "Invalid Value";
+		}
+		
+		int years = (int) (minutes/525600);
+		long remainder = minutes%525600;
+		int days = (int) (remainder/1440);
+		
+		
+		
+		return minutes + " min = "+years+" y and "+days+" d";
 	}
 
 	/**
@@ -167,8 +226,42 @@ public class EvaluationService {
 	 * statement or switch statement whatever is easier for you.
 	 */
 	public String printNumberInWord(int number) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		if (number == 0) {
+			return "ZERO";
+		}
+		else if (number == 1) {
+			return "ONE";
+		}
+		else if (number == 2) {
+			return "TWO";
+		}
+		else if (number == 3) {
+			return "THREE";
+		}
+		else if (number == 4) {
+			return "FOUR";
+		}
+		else if (number == 5) {
+			return "FIVE";
+		}
+		else if (number == 6) {
+			return "SIX";
+		}
+		else if (number == 7) {
+			return "SEVEN";
+		}
+		else if (number == 8) {
+			return "EIGHT";
+		}
+		else if (number == 9) {
+			return "NINE";
+		}
+		else {
+			return "OTHER";
+		}
+		
+		
 	}
 
 	/**
@@ -191,8 +284,23 @@ public class EvaluationService {
 	 * and there is no resulting remainder.
 	 */
 	public int getGreatestCommonDivisor(int first, int second) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		if (first < 10 || second < 10) {
+			return -1;
+		}
+		int i = first;
+		if (second > i) {
+			i = second;
+		}
+		while (i > 0) {
+			if (second%i == 0 && first%i == 0) {
+				return i;
+			}
+			
+			i--;
+		}
+		
+		return 1;
 	}
 
 	/**
@@ -209,8 +317,18 @@ public class EvaluationService {
 	 * invalid value.
 	 */
 	public int sumFirstAndLastDigit(int num) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		
+		if  (num < 0) {
+			return -1;
+		}
+		
+		int ones = num%10;
+		while (num > 9) {
+			num = num/10;
+		}
+		int tens = num*10;
+		
+		return ones+tens;
 	}
 
 	/**
@@ -220,8 +338,14 @@ public class EvaluationService {
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
 	 */
 	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	
+		String reversed = "";
+		
+		for (int i = string.length()-1; i >= 0; i--) {
+			reversed += string.charAt(i);
+		}
+		
+		return reversed;
 	}
 
 	/**
@@ -232,8 +356,14 @@ public class EvaluationService {
 	 * long name like Portable Network Graphics to its acronym (PNG).
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	
+		String acr = ""+ phrase.charAt(0);
+		for (int i = 1; i < phrase.length(); i++) {
+			if (phrase.charAt(i) == ' ') {
+				acr += phrase.charAt(i-1);
+			}
+		}
+		return acr;
 	}
 
 	/**
@@ -288,17 +418,27 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne == sideTwo && sideTwo == sideThree)
+			{
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+
+			if (isEquilateral() || isScalene())
+			{
+				return false;
+			}
+			return true;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne != sideTwo && sideTwo != sideThree && sideThree != sideOne)
+			{
+				return true;
+			}
 			return false;
 		}
 
@@ -319,8 +459,82 @@ public class EvaluationService {
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		for (int i = 0; i < string.length(); i++) {
+			char c = string.charAt(i);
+			
+			switch(c) {
+			case 'A':
+				score++;
+			case 'E':
+				score++;
+			case 'I':
+				score++;
+			case 'O':
+				score++;
+			case 'U':
+				score++;
+			case 'L':
+				score++;
+			case 'N':
+				score++;
+			case 'R':
+				score++;	
+			case 'S':
+				score++;	
+			case 'T':
+				score++;
+				
+			case 'D':
+				score+=2;
+			case 'G':
+				score+=2;
+				
+			case 'B':
+				score+=3;
+			case 'C':
+				score+=3;
+			case 'M':
+				score+=3;
+			case 'P':
+				score+=3;
+				//F, H, V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
+			case 'F':
+				score+=4;
+			case 'H':
+				score+=4;
+			case 'V':
+				score+=4;
+			case 'W':
+				score+=4;
+			case 'Y':
+				score+=4;
+				
+			case 'K':
+				score+=5;
+			
+			case 'J':
+				score+=8;
+			case 'X':
+				score+=8;
+			
+			case 'Q':
+				score+=10;
+			case 'Z':
+				score+=10;
+					
+				
+			default:
+				//do nothing
+			
+			}
+			
+			
+			
+		}
+		
+		
+		return score;
 	}
 
 	/**
@@ -357,7 +571,18 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		return null;
+		String output = "";
+		
+		for  (int i = 0; i < string.length(); i++) {
+			char c = string.charAt(i);
+			
+			if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9' ) {
+				output += c;
+			}
+			
+		}
+		
+		return output.substring(1, output.length());
 	}
 
 	/**
